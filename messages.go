@@ -58,7 +58,7 @@ type GenericMessage struct {
 }
 
 type recipient struct {
-	ID int64 `json:"id,string"`
+	ID string `json:"id,string"`
 }
 
 type textMessageContent struct {
@@ -99,7 +99,7 @@ type Button struct {
 // NewTextMessage creates new text message for userID
 // This function is here for convenient reason, you will
 // probably use shorthand version SentTextMessage which sends message immediatly
-func (msng Messenger) NewTextMessage(userID int64, text string) TextMessage {
+func (msng Messenger) NewTextMessage(userID string, text string) TextMessage {
 	return TextMessage{
 		Recipient: recipient{ID: userID},
 		Message:   textMessageContent{Text: text},
@@ -108,7 +108,7 @@ func (msng Messenger) NewTextMessage(userID int64, text string) TextMessage {
 
 // NewGenericMessage creates new Generic Template message for userID
 // Generic template messages are used for structured messages with images, links, buttons and postbacks
-func (msng Messenger) NewGenericMessage(userID int64) GenericMessage {
+func (msng Messenger) NewGenericMessage(userID string) GenericMessage {
 	return GenericMessage{
 		Recipient: recipient{ID: userID},
 		Message: genericMessageContent{

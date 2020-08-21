@@ -22,15 +22,15 @@ type Messenger struct {
 	pageURL string
 
 	// MessageReceived event fires when message from Facebook received
-	MessageReceived func(msng *Messenger, userID int64, m FacebookMessage)
+	MessageReceived func(msng *Messenger, userID string, m FacebookMessage)
 
 	// DeliveryReceived event fires when delivery report from Facebook received
 	// Omit (nil) if you don't want to manage this events
-	DeliveryReceived func(msng *Messenger, userI int64, d FacebookDelivery)
+	DeliveryReceived func(msng *Messenger, userI string, d FacebookDelivery)
 
 	// PostbackReceived event fires when postback received from Facebook server
 	// Omit (nil) if you don't use postbacks and you don't want to manage this events
-	PostbackReceived func(msng *Messenger, userID int64, p FacebookPostback)
+	PostbackReceived func(msng *Messenger, userID string, p FacebookPostback)
 }
 
 // New creates new messenger instance
@@ -67,7 +67,7 @@ func (msng *Messenger) SendMessage(m Message) (FacebookResponse, error) {
 
 // SendTextMessage sends text messate to receiverID
 // it is shorthand instead of crating new text message and then sending it
-func (msng Messenger) SendTextMessage(receiverID int64, text string) (FacebookResponse, error) {
+func (msng Messenger) SendTextMessage(receiverID string, text string) (FacebookResponse, error) {
 	m := msng.NewTextMessage(receiverID, text)
 	return msng.SendMessage(&m)
 }

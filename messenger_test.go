@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mileusna/facebook-messenger"
+	messenger "github.com/mileusna/facebook-messenger"
 )
 
 var fs *httptest.Server
@@ -22,7 +22,7 @@ func TestMain(m *testing.M) {
 	// fs will mock up fb messenger server
 	fs = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		rec := messenger.FacebookResponse{
-			RecipientID: 12123213123,
+			RecipientID: "12123213123",
 			MessageID:   "mid00000TEST00000TEST00000TEST",
 		}
 		b, _ := json.Marshal(rec)

@@ -5,18 +5,18 @@ import "fmt"
 // FacebookRequest received from Facebook server on webhook, contains messages, delivery reports and/or postbacks
 type FacebookRequest struct {
 	Entry []struct {
-		ID        int64 `json:"id"`
+		ID        string `json:"id"`
 		Messaging []struct {
 			Recipient struct {
-				ID int64 `json:"id,string"`
+				ID string `json:"id"`
 			} `json:"recipient"`
 			Sender struct {
-				ID int64 `json:"id,string"`
+				ID string `json:"id"`
 			} `json:"sender"`
 			Timestamp int               `json:"timestamp"`
 			Message   *FacebookMessage  `json:"message,omitempty"`
-			Delivery  *FacebookDelivery `json:"delivery"`
-			Postback  *FacebookPostback `json:"postback"`
+			Delivery  *FacebookDelivery `json:"delivery,omitempty"`
+			Postback  *FacebookPostback `json:"postback,omitempty"`
 		} `json:"messaging"`
 		Time int `json:"time"`
 	} `json:"entry"`
@@ -25,15 +25,16 @@ type FacebookRequest struct {
 
 // FacebookMessage struct for text messaged received from facebook server as part of FacebookRequest struct
 type FacebookMessage struct {
-	Mid  string `json:"mid"`
-	Seq  int    `json:"seq"`
-	Text string `json:"text"`
+	Mid      string `json:"mid"`
+	Echo     bool   `json:"is_echo,omitempty"`
+	AppID    int64  `json:"app_id,omitempty"`
+	MetaData string `json:"metadata,omitempty"`
+	Text     string `json:"text,omitempty"`
 }
 
 // FacebookDelivery struct for delivery reports received from Facebook server as part of FacebookRequest struct
 type FacebookDelivery struct {
 	Mids      []string `json:"mids"`
-	Seq       int      `json:"seq"`
 	Watermark int      `json:"watermark"`
 }
 
@@ -46,14 +47,14 @@ type FacebookPostback struct {
 // if Error is null we copy this into FacebookResponse object
 type rawFBResponse struct {
 	MessageID   string         `json:"message_id"`
-	RecipientID int64          `json:"recipient_id,string"`
+	RecipientID string         `json:"recipient_id"`
 	Error       *FacebookError `json:"error"`
 }
 
 // FacebookResponse received from Facebook server after sending the message
 type FacebookResponse struct {
 	MessageID   string `json:"message_id"`
-	RecipientID int64  `json:"recipient_id,string"`
+	RecipientID string `json:"recipient_id"`
 }
 
 // FacebookError received form Facebook server if sending messages failed
