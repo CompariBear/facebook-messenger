@@ -11,16 +11,27 @@ type FacebookRequest struct {
 				ID string `json:"id"`
 			} `json:"recipient"`
 			Sender struct {
-				ID string `json:"id"`
+				ID      string `json:"id"`
+				UserRef string `json:"user_ref,omitempty"`
 			} `json:"sender"`
 			Timestamp int               `json:"timestamp"`
 			Message   *FacebookMessage  `json:"message,omitempty"`
 			Delivery  *FacebookDelivery `json:"delivery,omitempty"`
 			Postback  *FacebookPostback `json:"postback,omitempty"`
+			Referral  *FacebookReferral `json:"referral,omitempty"`
 		} `json:"messaging"`
 		Time int `json:"time"`
 	} `json:"entry"`
 	Object string `json:"object"`
+}
+
+// FacebookReferral struct for all links and add references
+type FacebookReferral struct {
+	Ref    string `json:"ref"`
+	Source string `json:"source"`
+	Type   string `json:"type"`
+	AdID   string `json:"ad_id,omitempty"`
+	RefURI string `json:"referer_uri,omitempty"`
 }
 
 // FacebookMessage struct for text messaged received from facebook server as part of FacebookRequest struct
