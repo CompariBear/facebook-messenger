@@ -36,11 +36,11 @@ type FacebookReferral struct {
 
 // FacebookMessage struct for text messaged received from facebook server as part of FacebookRequest struct
 type FacebookMessage struct {
-	Mid      string `json:"mid"`
-	Echo     bool   `json:"is_echo,omitempty"`
-	AppID    int64  `json:"app_id,omitempty"`
-	MetaData string `json:"metadata,omitempty"`
-	Text     string `json:"text,omitempty"`
+	Mid      string  `json:"mid"`
+	Echo     bool    `json:"is_echo,omitempty"`
+	AppID    int64   `json:"app_id,omitempty"`
+	MetaData *string `json:"metadata,omitempty"`
+	Text     string  `json:"text,omitempty"`
 }
 
 // FacebookDelivery struct for delivery reports received from Facebook server as part of FacebookRequest struct
