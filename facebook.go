@@ -32,15 +32,16 @@ type FacebookReferral struct {
 	Type   string `json:"type"`
 	AdID   string `json:"ad_id,omitempty"`
 	RefURI string `json:"referer_uri,omitempty"`
+	Guest  string `json:"is_guest_user,omitempty"`
 }
 
 // FacebookMessage struct for text messaged received from facebook server as part of FacebookRequest struct
 type FacebookMessage struct {
-	Mid      string  `json:"mid"`
-	Echo     bool    `json:"is_echo,omitempty"`
-	AppID    int64   `json:"app_id,omitempty"`
-	MetaData *string `json:"metadata,omitempty"`
-	Text     string  `json:"text,omitempty"`
+	Mid      string `json:"mid"`
+	Echo     bool   `json:"is_echo,omitempty"`
+	AppID    int64  `json:"app_id,omitempty"`
+	MetaData string `json:"metadata,omitempty"`
+	Text     string `json:"text,omitempty"`
 }
 
 // FacebookDelivery struct for delivery reports received from Facebook server as part of FacebookRequest struct
@@ -51,7 +52,9 @@ type FacebookDelivery struct {
 
 // FacebookPostback struct for postbacks received from Facebook server  as part of FacebookRequest struct
 type FacebookPostback struct {
-	Payload string `json:"payload"`
+	Title    string            `json:"title"`
+	Payload  string            `json:"payload"`
+	Referral *FacebookReferral `json:"referral"`
 }
 
 // rawFBResponse received from Facebook server after sending the message
