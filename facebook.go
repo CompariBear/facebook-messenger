@@ -19,10 +19,18 @@ type FacebookRequest struct {
 			Delivery  *FacebookDelivery `json:"delivery,omitempty"`
 			Postback  *FacebookPostback `json:"postback,omitempty"`
 			Referral  *FacebookReferral `json:"referral,omitempty"`
+			Optin     *FacebookOPtin    `json:"optin,omitempty"`
 		} `json:"messaging"`
 		Time int `json:"time"`
 	} `json:"entry"`
 	Object string `json:"object"`
+}
+
+// FacebookOPtin struct for one time notification requests
+type FacebookOPtin struct {
+	Type         string `json:"type"`
+	Payload      string `json:"payload"`
+	OneTimeToken string `json:"one_time_notif_token"`
 }
 
 // FacebookReferral struct for all links and add references
