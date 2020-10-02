@@ -40,7 +40,7 @@ type FacebookReferral struct {
 	Type   string `json:"type"`
 	AdID   string `json:"ad_id,omitempty"`
 	RefURI string `json:"referer_uri,omitempty"`
-	Guest  string `json:"is_guest_user,omitempty"`
+	Guest  bool   `json:"is_guest_user,omitempty"`
 }
 
 // FacebookMessage struct for text messaged received from facebook server as part of FacebookRequest struct
