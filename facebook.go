@@ -21,6 +21,21 @@ type FacebookRequest struct {
 			Referral  *FacebookReferral `json:"referral,omitempty"`
 			Optin     *FacebookOPtin    `json:"optin,omitempty"`
 		} `json:"messaging"`
+		Changes []struct {
+			Value struct {
+				From struct {
+					ID   string `json:"id,omitempty"`
+					Name string `json:"name,omitempty"`
+				} `json:"from,omitempty"`
+				PostID       string `json:"post_id,omitempty"`
+				CreatedTime  int64  `json:"created_time,omitempty"`
+				Item         string `json:"item,omitempty"`
+				ParentID     string `json:"parent_id,omitempty"`
+				ReactionType string `json:"reaction_type,omitempty"`
+				Verb         string `json:"verb,omitempty"`
+			} `json:"value,omitempty"`
+			Field string `json:"field,omitempty"`
+		} `json:"changes,omitempty,omitempty"`
 		Time int `json:"time"`
 	} `json:"entry"`
 	Object string `json:"object"`
